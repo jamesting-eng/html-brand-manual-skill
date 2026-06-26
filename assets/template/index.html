@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brand Visual Manual — [BRAND] v1.0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   BRAND VISUAL MANUAL — CSS TEMPLATE
+   All patterns proven across 10+ iterations
+   ============================================ */
+
+/* ===== 1. RESET & BASE ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body {
+  font-family: 'Inter', 'Noto Sans SC', -apple-system, sans-serif;
+  background: #F5F5F7;
+  color: #1a1a2e;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ===== 2. CUSTOM PROPERTIES (:root) ===== */
+:root {
+  /* Primary palette (example: deep blue) -- REPLACE with your brand colors */
+  --primary-50: #E8EEF8;
+  --primary-100: #C5D4E8;
+  --primary-200: #9BB4D6;
+  --primary-300: #7194C4;
+  --primary-400: #4774B2;
+  --primary-500: #1D54A0;
+  --primary-600: #174682;
+  --primary-700: #0E3864;
+  --primary-800: #0B2A48;
+  --primary-900: #071C2D;
+
+  /* Secondary palette (example: sky blue) */
+  --secondary-50: #F0F9FF;
+  --secondary-100: #E0F2FE;
+  --secondary-200: #B9E6FE;
+  --secondary-300: #7CD4FD;
+  --secondary-400: #36Bffa;
+  --secondary-500: #0BA5E9;
+  --secondary-600: #0284C7;
+  --secondary-700: #0369A1;
+  --secondary-800: #075985;
+  --secondary-900: #0C4A6E;
+
+  /* Accent palette (example: amber gold) */
+  --accent-50: #FFF8EB;
+  --accent-100: #FEF3C7;
+  --accent-200: #FDE68A;
+  --accent-300: #FCD34D;
+  --accent-400: #FBBF24;
+  --accent-500: #F59E0B;
+  --accent-600: #D97706;
+  --accent-700: #B45309;
+  --accent-800: #92400E;
+  --accent-900: #78350F;
+
+  /* Neutrals */
+  --gray-50: #F9FAFB;
+  --gray-100: #F3F4F6;
+  --gray-200: #E5E7EB;
+  --gray-300: #D1D5DB;
+  --gray-400: #9CA3AF;
+  --gray-500: #6B7280;
+  --gray-600: #4B5563;
+  --gray-700: #374151;
+  --gray-800: #1F2937;
+  --gray-900: #111827;
+
+  /* Spacing scale */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+
+  /* Border radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+  --shadow-lg: 0 10px 30px rgba(0,0,0,0.12);
+  --shadow-xl: 0 20px 60px rgba(0,0,0,0.15);
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+
+  /* Layout */
+  --nav-width: 260px;
+  --content-max: 1200px;
+}
+
+/* ===== 3. TYPOGRAPHY SYSTEM — CJK-CORRECT ===== */
+
+/* BODY TEXT: natural CJK wrapping, fills container width */
+body, p, li, td, th, div, span, blockquote, strong, em, b, i,
+label, input, textarea, button, a {
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+}
+p { line-height: 1.85; }
+
+/* HEADINGS: phrase protection, no mid-sentence breaks */
+h1, h2, h3, h4, h5, h6 {
+  word-break: keep-all !important;
+  overflow-wrap: normal !important;
+  /* NOTE: No nowrap on generic h1-h6 — long headings need to wrap */
+}
+h1 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(28px, 4vw, 48px); font-weight: 700; letter-spacing: -1px; }
+h2 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(22px, 3vw, 36px); font-weight: 700; color: var(--primary-900); letter-spacing: -0.5px; }
+h3 { font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 600; color: var(--primary-900); margin-top: var(--space-xl); margin-bottom: var(--space-md); }
+
+/* Short title elements: never break (these are always short enough) */
+.section-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--primary-900);
+  letter-spacing: -1px;
+  margin-bottom: var(--space-sm);
+  white-space: nowrap !important;
+}
+.subsection-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--primary-900);
+  border-left: 4px solid var(--secondary-500);
+  padding-left: var(--space-md);
+  margin-bottom: var(--space-md);
+  white-space: nowrap !important;
+}
+.section-number {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--secondary-600);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: var(--space-sm);
+  white-space: nowrap !important;
+}
+.section-desc {
+  font-size: 16px;
+  color: var(--gray-500);
+  line-height: 1.85;
+  word-break: normal;
+  /* No max-width — let it fill container naturally */
+}
+
+/* ===== 4. LAYOUT GRID ===== */
+.app-container { display: flex; min-height: 100vh; }
+
+.nav-sidebar {
+  width: var(--nav-width);
+  min-width: var(--nav-width);
+  background: var(--primary-900);
+  color: #fff;
+  position: fixed;
+  top: 0; left: 0;
+  bottom: 0;
+  overflow-y: auto;
+  z-index: 100;
+  padding: var(--space-xl) var(--space-md);
+}
+
+.main-content {
+  flex: 1;
+  margin-left: var(--nav-width);
+  padding: var(--space-3xl) var(--space-2xl);
+  max-width: calc(var(--content-max) + var(--space-2xl) * 2);
+}
+
+.content-section {
+  max-width: var(--content-max);
+  margin: 0 auto var(--space-3xl);
+  padding: var(--space-2xl);
+  background: #fff;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ===== 5. NAVIGATION ===== */
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: var(--space-xl);
+  padding-bottom: var(--space-lg);
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+  min-height: 52px;
+}
+
+.nav-logo-icon svg {
+  width: 28px;
+  height: 28px;
+  color: #fff;
+  display: block;
+}
+
+.nav-logo-text-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;  /* NOT center — prevents drift */
+  gap: 0;
+  min-width: auto;
+  overflow: visible;
+}
+
+.nav-logo-wordmark {
+  line-height: 1;
+  overflow: visible;
+  min-height: 18px;
+}
+
+.nav-logo-wordmark svg {
+  width: 70px;
+  height: 16px;           /* FIXED — for negative-coord viewBox */
+  color: #ffffff;
+  display: block;
+  overflow: visible;     /* Always show full SVG content */
+}
+
+.nav-logo-sub {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 9px;
+  color: var(--primary-400);
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  line-height: 1;
+  margin-top: 4px;        /* Precise spacing between wordmark & sub */
+}
+
+/* Nav chapter list */
+.nav-group-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--secondary-400);
+  margin: var(--space-lg) 0 var(--space-sm);
+  padding-left: var(--space-sm);
+}
+.nav-chapters { list-style: none; }
+.nav-chapters li { margin-bottom: 2px; }
+.nav-chapters a {
+  display: block;
+  padding: 8px 12px;
+  color: var(--primary-300);
+  text-decoration: none;
+  font-size: 13px;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+  word-break: keep-all;
+}
+.nav-chapters a:hover,
+.nav-chapters a.active {
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+}
+
+/* ===== 6. COVER PAGE ===== */
+.cover-page {
+  text-align: center;
+  padding: var(--space-3xl) var(--space-2xl);
+  background: linear-gradient(160deg, var(--primary-900) 0%, var(--primary-700) 50%, var(--secondary-900) 100%);
+  color: #fff;
+  border-radius: var(--radius-xl);
+  margin-bottom: var(--space-2xl);
+}
+.cover-logo { margin: var(--space-2xl) auto; max-width: 280px; }
+.cover-logo svg { width: 100%; height: auto; color: #fff; }
+.cover-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 700;
+  margin-bottom: var(--space-sm);
+}
+.cover-subtitle {
+  font-size: 14px;
+  opacity: 0.7;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+.cover-divider {
+  width: 60px;
+  height: 2px;
+  background: var(--accent-400);
+  margin: var(--space-xl) auto;
+}
+.cover-meta {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-lg);
+  margin-top: var(--space-2xl);
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+/* ===== 7. PART DIVIDER ===== */
+.part-divider {
+  text-align: center;
+  padding: var(--space-3xl) var(--space-2xl);
+  background: linear-gradient(135deg, var(--primary-50), var(--secondary-50));
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-2xl);
+  border: 1px solid var(--gray-100);
+}
+.part-divider-num {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--secondary-500);
+  margin-bottom: var(--space-sm);
+}
+.part-divider-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--primary-900);
+  white-space: nowrap !important;
+}
+.part-divider-desc {
+  font-size: 15px;
+  color: var(--gray-500);
+  margin-top: var(--space-sm);
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ===== 8. COMPONENT LIBRARY ===== */
+.info-card {
+  background: var(--secondary-50);
+  border-left: 4px solid var(--secondary-500);
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  color: var(--gray-700);
+}
+.warning-card {
+  background: #FFF8F0;
+  border-left: 4px solid var(--accent-500);
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  color: var(--gray-700);
+}
+.do-dont-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+.do-card, .dont-card {
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  font-size: 13px;
+}
+.do-card {
+  border: 2px solid #10B981;
+  background: #ECFDF5;
+}
+.dont-card {
+  border: 2px solid #EF4444;
+  background: #FEF2F2;
+}
+.color-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: var(--space-sm);
+}
+.color-swatch {
+  aspect-ratio: 1;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: flex-end;
+  padding: var(--space-sm);
+  font-size: 11px;
+  font-weight: 600;
+  font-family: 'Space Grotesk', monospace;
+  color: inherit;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-fast);
+}
+.color-swatch:hover { transform: scale(1.05); }
+.spec-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.spec-table th {
+  background: var(--gray-100);
+  font-weight: 600;
+  text-align: left;
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 2px solid var(--gray-200);
+}
+.spec-table td {
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--gray-100);
+  vertical-align: top;
+}
+.dark-demo {
+  background: var(--primary-900);
+  color: #fff;
+  padding: var(--space-xl);
+  border-radius: var(--radius-lg);
+}
+.dark-demo .color-swatch { color: inherit; }
+
+/* Device mockup frame */
+.device-frame {
+  width: 280px;
+  height: 560px;
+  background: #fff;
+  border-radius: 30px;
+  border: 6px solid var(--gray-900);
+  overflow: hidden;
+  position: relative;
+  box-shadow: var(--shadow-xl);
+  flex-shrink: 0;
+}
+.device-notch {
+  width: 120px;
+  height: 22px;
+  background: var(--gray-900);
+  border-radius: 0 0 16px 16px;
+  margin: 0 auto;
+}
+.device-screen {
+  padding: var(--space-sm);
+  min-height: 520px;
+}
+
+/* Grid layouts for component demos */
+.demo-row {
+  display: flex;
+  gap: var(--space-lg);
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+.demo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-md);
+}
+
+/* ===== 9. RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .nav-sidebar { transform: translateX(-100%); transition: transform 0.3s ease; }
+  .nav-sidebar.open { transform: translateX(0); }
+  .main-content { margin-left: 0; }
+  .do-dont-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .main-content { padding: var(--space-md); }
+  .content-section { padding: var(--space-lg); }
+  .cover-page { padding: var(--space-2xl) var(--space-md); }
+}
+
+/* ===== UTILITY CLASSES ===== */
+.text-center { text-align: center; }
+.text-muted { color: var(--gray-500); }
+.mt-sm { margin-top: var(--space-sm); }
+.mt-md { margin-top: var(--space-md); }
+.mt-lg { margin-top: var(--space-lg); }
+.mt-xl { margin-top: var(--space-xl); }
+.mb-sm { margin-bottom: var(--space-sm); }
+.mb-md { margin-bottom: var(--space-md); }
+.mb-lg { margin-bottom: var(--space-lg); }
+.mb-xl { margin-bottom: var(--space-xl); }
+</style>
+</head>
+<body>
+
+<div class="app-container">
+
+<!-- ============ NAVIGATION SIDEBAR ============ -->
+<nav class="nav-sidebar" id="navSidebar">
+  <div class="nav-logo">
+    <div class="nav-logo-icon">
+      <svg viewBox="0 0 581 641" fill="currentColor"><use href="#brand-icon"/></svg>
+    </div>
+    <div class="nav-logo-text-col">
+      <div class="nav-logo-wordmark">
+        <!-- CRITICAL: explicit width/height + overflow:visible for negative-coord viewBox -->
+        <svg width="70" height="16" viewBox="-8.6 -85.4 456.0 91.0"
+             overflow="visible" role="img" aria-label="[BRAND]"
+             style="display:block;overflow:visible;color:#ffffff;">
+          <use href="#brand-wordmark"/>
+        </svg>
+      </div>
+      <div class="nav-logo-sub">Brand Manual</div>
+    </div>
+  </div>
+
+  <ul class="nav-chapters">
+    <li><div class="nav-group-title">Brand Soul</div></li>
+    <li><a href="#ch01-philosophy">01 Philosophy</a></li>
+    <li><a href="#ch02-story">02 Brand Story</a></li>
+    <li><a href="#ch03-audience">03 Audience</a></li>
+    <li><a href="#ch04-tone">04 Tone of Voice</a></li>
+
+    <li><div class="nav-group-title">Visual Foundation</div></li>
+    <li><a href="#ch05-colors">05 Color System</a></li>
+    <li><a href="#ch06-logo">06 Logo</a></li>
+    <li><a href="#ch07-typography">07 Typography</a></li>
+    <li><a href="#ch08-icons">08 Iconography</a></li>
+
+    <li><div class="nav-group-title">Application</div></li>
+    <li><a href="#ch09-marketing">09 Marketing</a></li>
+    <li><a href="#ch10-social">10 Social Media</a></li>
+    <li><a href="#ch11-packaging">11 Packaging</a></li>
+
+    <li><div class="nav-group-title">Resources</div></li>
+    <li><a href="#ch12-assets">12 Asset Library</a></li>
+    <li><a href="#ch13-history">13 Version History</a></li>
+  </ul>
+</nav>
+
+<!-- ============ MAIN CONTENT ============ -->
+<main class="main-content">
+
+<!-- ===== COVER PAGE ===== -->
+<div class="cover-page">
+  <div class="cover-logo">
+    <svg viewBox="0 0 601 974.9" fill="currentColor"><use href="#brand-full-slogan"/></svg>
+  </div>
+  <h1 class="cover-title">[BRAND]</h1>
+  <p class="cover-subtitle">Brand Visual Manual</p>
+  <div class="cover-divider"></div>
+  <p style="font-style:italic;opacity:0.8;">[SLOGAN]</p>
+  <div class="cover-meta">
+    <span>📅 January 2024</span>
+    <span>🌐 EN / 中文</span>
+    <span>🔒 Confidential</span>
+  </div>
+</div>
+
+<!-- ===== PART I DIVIDER ===== -->
+<div class="part-divider">
+  <div class="part-divider-num">Part I</div>
+  <div class="part-divider-title">Brand Soul</div>
+  <div class="part-divider-desc">The foundational beliefs and identity that define who we are.</div>
+</div>
+
+<!-- ===== CHAPTER 01: PHILOSOPHY ===== -->
+<section id="ch01-philosophy" class="content-section">
+  <div class="section-number">01 — Brand Soul</div>
+  <h2 class="section-title">Philosophy</h2>
+  <div class="section-desc">The core principles that guide every brand decision we make.</div>
+
+  <h3>Core Values</h3>
+  <div class="demo-grid">
+    <div class="info-card">
+      <strong style="color:var(--secondary-600)">Value One</strong>
+      <p style="margin-top:8px;font-size:14px;">Description of the first core value that drives the brand's actions and decisions.</p>
+    </div>
+    <div class="info-card">
+      <strong style="color:var(--secondary-600)">Value Two</strong>
+      <p style="margin-top:8px;font-size:14px;">Description of the second core value that shapes how we interact with customers.</p>
+    </div>
+    <div class="info-card">
+      <strong style="color:var(--secondary-600)">Value Three</strong>
+      <p style="margin-top:8px;font-size:14px;">Description of the third core value that defines our approach to quality.</p>
+    </div>
+  </div>
+
+  <h3>Mission Statement</h3>
+  <p>[MISSION STATEMENT — one clear sentence about what the brand exists to do.]</p>
+
+  <h3>Vision</h3>
+  <p>[VISION STATEMENT — what the world looks like when the brand succeeds.]</p>
+</section>
+
+<!-- ===== CHAPTER 02: BRAND STORY ===== -->
+<section id="ch02-story" class="content-section">
+  <div class="section-number">02 — Brand Soul</div>
+  <h2 class="section-title">Brand Story</h2>
+  <div class="section-desc">How the brand came to be and why it matters.</div>
+
+  <!-- Dark story card example -->
+  <div style="background:var(--primary-900);color:#fff;padding:var(--space-2xl);border-radius:var(--radius-lg);margin:var(--space-lg) 0;">
+    <h3 style="color:#fff;border:none;padding:0;">Origin</h3>
+    <p style="font-size:15px;line-height:1.8;opacity:0.9;">
+      [Brand story narrative goes here. This paragraph demonstrates correct CJK typography:
+      Chinese text will fill the container width naturally, breaking at phrase boundaries.
+      No max-width constraint needed — the paragraph flows freely within its card container.]
+    </p>
+    <p style="font-size:15px;line-height:1.8;opacity:0.9;margin-top:var(--space-md);">
+      [Continue the narrative. Each paragraph should flow naturally without artificial
+      width constraints. The dark card provides visual contrast while maintaining readability.]
+    </p>
+  </div>
+</section>
+
+<!-- ===== CHAPTER 05: COLOR SYSTEM ===== -->
+<section id="ch05-colors" class="content-section">
+  <div class="section-number">05 — Visual Foundation</div>
+  <h2 class="section-title">Color System</h2>
+  <div class="section-desc">The complete palette with hex values, usage guidelines, and accessibility data.</div>
+
+  <h3>Primary Palette</h3>
+  <div class="color-grid" id="primarySwatches"></div>
+
+  <h3>Secondary Palette</h3>
+  <div class="color-grid" id="secondarySwatches"></div>
+
+  <h3>Color Usage Rules</h3>
+  <table class="spec-table mt-md">
+    <thead><tr><th>Context</th><th>Background</th><th>Text</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td>Primary UI</td><td>#FFFFFF</td><td>var(--primary-900)</td><td>Main content areas</td></tr>
+      <tr><td>Inverse / Hero</td><td>var(--primary-900)</td><td>#FFFFFF</td><td>Cover page, nav sidebar</td></tr>
+      <tr><td>Accent / CTA</td><td>var(--secondary-500)</td><td>#FFFFFF</td><td>Buttons, links</td></tr>
+      <tr><td>Warning</td><td>var(--accent-50)</td><td>var(--accent-900)</td><td>Alerts, tips</td></tr>
+    </tbody>
+  </table>
+
+  <div class="warning-card mt-lg">
+    <strong>Accessibility Note:</strong> Ensure all text meets WCAG AA contrast ratio (4.5:1 for normal text, 3:1 for large text).
+  </div>
+</section>
+
+<!-- ===== CHAPTER 06: LOGO ===== -->
+<section id="ch06-logo" class="content-section">
+  <div class="section-number">06 — Visual Foundation</div>
+  <h2 class="section-title">Logo System</h2>
+  <div class="section-desc">Logo variants, clear space requirements, minimum sizes, and usage rules.</div>
+
+  <h3>Logo Variants</h3>
+  <div class="demo-row" style="justify-content:center;gap:var(--space-2xl);flex-wrap:wrap;">
+    <div class="text-center">
+      <svg width="80" height="88" viewBox="0 0 581 641" style="color:var(--primary-900);display:block;margin:0 auto;"><use href="#brand-icon"/></svg>
+      <p class="text-muted mt-sm" style="font-size:12px;">Icon Only</p>
+    </div>
+    <div class="text-center">
+      <svg width="200" height="40" viewBox="-8.6 -85.4 456.0 91.0" overflow="visible" style="color:var(--primary-900);display:block;margin:0 auto;"><use href="#brand-wordmark"/></svg>
+      <p class="text-muted mt-sm" style="font-size:12px;">Wordmark</p>
+    </div>
+    <div class="text-center">
+      <svg width="240" height="56" viewBox="0 0 601.0 974.9" style="color:var(--primary-900);display:block;margin:0 auto;"><use href="#brand-full-slogan"/></svg>
+      <p class="text-muted mt-sm" style="font-size:12px;">Full + Slogan</p>
+    </div>
+  </div>
+
+  <h3>Clear Space</h3>
+  <div class="info-card">Maintain a minimum clear space equal to the height of the icon element around all sides of the logo.</div>
+
+  <h3>Minimum Size</h3>
+  <table class="spec-table mt-md">
+    <tr><th>Context</th><th>Minimum Width</th><th>Notes</th></tr>
+    <tr><td>Print</td><td>25mm</td><td>For small formats like business cards</td></tr>
+    <tr><td>Digital</td><td>120px</td><td>For mobile screens</td></tr>
+    <tr><td>Favicon</td><td>32×32px</td><td>Square format only</td></tr>
+  </table>
+
+  <h3 class="mt-lg">Do's and Don'ts</h3>
+  <div class="do-dont-grid">
+    <div class="do-card"><strong>Do:</strong> Maintain clear space. Use approved color versions. Scale proportionally.</div>
+    <div class="dont-card"><strong>Don't:</strong> Stretch or distort. Add effects (drop shadow, gradient). Change colors arbitrarily.</div>
+  </div>
+</section>
+
+<!-- ===== CHAPTER 07: TYPOGRAPHY ===== -->
+<section id="ch07-typography" class="content-section">
+  <div class="section-number">07 — Visual Foundation</div>
+  <h2 class="section-title">Typography</h2>
+  <div class="section-desc">Typeface selection, hierarchy system, and usage guidelines.</div>
+
+  <h3>Typeface Family</h3>
+  <table class="spec-table">
+    <tr><th>Use Case</th><th>Typeface</th><th>Weight</th><th>Example</th></tr>
+    <tr><td>Headlines</td><td>Space Grotesk</td><td>700 Bold</td><td style="font-family:'Space Grotesk',sans-serif;font-weight:700">The Quick Brown Fox</td></tr>
+    <tr><td>Subheadings</td><td>Space Grotesk</td><td>600 SemiBold</td><td style="font-family:'Space Grotesk',sans-serif;font-weight:600">Subheading Text Here</td></tr>
+    <tr><td>Body Text (EN)</td><td>Inter</td><td>400 Regular</td><td style="font-family:'Inter',sans-serif;">Body text in Inter is clean and highly legible.</td></tr>
+    <tr><td>Body Text (中文)</td><td>Noto Sans SC</td><td>400 Regular</td><td style="font-family:'Noto Sans SC',sans-serif;">中文正文使用思源黑体，清晰易读。</td></tr>
+  </table>
+
+  <h3>Type Scale</h3>
+  <div class="demo-grid">
+    <div style="font-family:'Space Grotesk';font-size:36px;font-weight:700;color:var(--primary-900)">Heading 1</div>
+    <div style="font-family:'Space Grotesk';font-size:28px;font-weight:700;color:var(--primary-900)">Heading 2</div>
+    <div style="font-family:'Space Grotesk';font-size:20px;font-weight:600;color:var(--primary-900)">Heading 3</div>
+    <div style="font-family:'Inter',sans-serif;font-size:16px;">Body text — The quick brown fox jumps over the lazy dog. 快速的棕色狐狸跳过懒狗。</div>
+    <div style="font-family:'Inter',sans-serif;font-size:14px;color:var(--gray-500);">Small text / Caption</div>
+    <div style="font-family:'Space Grotesk',sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--gray-400);">Label / Tag</div>
+  </div>
+</section>
+
+<!-- ===== PART II DIVIDER ===== -->
+<div class="part-divider">
+  <div class="part-divider-num">Part II</div>
+  <div class="part-divider-title">Application</div>
+  <div class="part-divider-desc">How the brand comes to life across touchpoints.</div>
+</div>
+
+<!-- ===== VERSION HISTORY ===== -->
+<section id="ch13-history" class="content-section">
+  <div class="section-number">13 — Resources</div>
+  <h2 class="section-title">Version History</h2>
+  <div class="section-desc">Track all changes and updates to this manual.</div>
+  <div style="overflow:hidden;">
+    <table class="spec-table" style="table-layout:fixed;">
+      <colgroup><col style="width:60px"><col style="width:90px"><col></colgroup>
+      <thead><tr><th>Version</th><th>Date</th><th>Changes</th></tr></thead>
+      <tbody>
+        <tr><td style="font-weight:600;">v1.0</td><td>2024-01-01</td><td>Initial release with core chapters</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+</main>
+</div><!-- end .app-container -->
+
+<!-- ============ SVG SYMBOL DEFINITIONS ============ -->
+<svg xmlns="http://www.w3.org/2000/svg" display="none">
+
+  <!-- Icon (placeholder: simple geometric mark) -->
+  <symbol id="brand-icon" viewBox="0 0 581 641">
+    <!-- Replace with actual icon path data -->
+    <circle cx="290" cy="320" r="180" fill="currentColor"/>
+    <circle cx="290" cy="320" r="120" fill="none" stroke="currentColor" stroke-width="20"/>
+    <polygon points="290,160 340,270 230,270" fill="currentColor"/>
+  </symbol>
+
+  <!-- Wordmark (placeholder: replace with opentype.js converted paths) -->
+  <!-- NOTE: viewBox often has negative coordinates from font conversion! -->
+  <symbol id="brand-wordmark" viewBox="-8.6 -85.4 456.0 91.0">
+    <!-- Replace with actual wordmark path data from font conversion -->
+    <rect x="0" y="-80" width="440" height="86" rx="8" fill="currentColor"/>
+    <text x="220" y="-22" text-anchor="middle" dominant-baseline="middle"
+          font-family="Arial,sans-serif" font-size="56" font-weight="bold" fill="white">[BRAND]</text>
+  </symbol>
+
+  <!-- Slogan (placeholder: custom font as paths) -->
+  <symbol id="brand-slogan" viewBox="-4.0 -4.0 412.8 102.5">
+    <!-- Replace with actual slogan path data -->
+    <rect x="0" y="0" width="405" height="95" rx="4" fill="none" stroke="currentColor" stroke-width="3"/>
+    <text x="202" y="55" text-anchor="middle" dominant-baseline="middle"
+          font-family="'Georgia',serif" font-size="36" font-style="italic" fill="currentColor">[SLOGAN]</text>
+  </symbol>
+
+  <!-- Full: icon + wordmark stacked -->
+  <symbol id="brand-full" viewBox="0 0 601.0 848.4">
+    <use href="#brand-icon" x="10" y="0" width="250" height="280"/>
+    <use href="#brand-wordmark" x="72" y="745.4" width="456" height="91"/>
+  </symbol>
+
+  <!-- Full + Slogan -->
+  <symbol id="brand-full-slogan" viewBox="0 0 601.0 974.9">
+    <use href="#brand-full" x="0" y="0"/>
+    <use href="#brand-slogan" x="94" y="870" width="413" height="103"/>
+  </symbol>
+
+</svg>
+
+<!-- ============ INTERACTIVE SCRIPTS ============ -->
+<script>
+// Color swatch generator (populates swatch grids)
+(function() {
+  const palettes = {
+    primary: [
+      ['50','#E8EEF8','900'],
+      ['100','#C5D4E8','900'],
+      ['200','#9BB4D6','900'],
+      ['300','#7194C4','900'],
+      ['400','#4774B2','50'],
+      ['500','#1D54A0','50'],
+      ['600','#174682','50'],
+      ['700','#0E3864','50'],
+      ['800','#0B2A48','50'],
+      ['900','#071C2D','50'],
+    ],
+    secondary: [
+      ['50','#F0F9FF','900'],
+      ['100','#E0F2FE','900'],
+      ['200','#B9E6FE','900'],
+      ['300','#7CD4FD','900'],
+      ['400','#36BFFA','900'],
+      ['500','#0BA5E9','50'],
+      ['600','#0284C7','50'],
+      ['700','#0369A1','50'],
+      ['800','#075985','50'],
+      ['900','#0C4A6E','50'],
+    ]
+  };
+
+  function renderSwatches(containerId, paletteName) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    palettes[paletteName].forEach(function(sw) {
+      const div = document.createElement('div');
+      div.className = 'color-swatch';
+      div.style.backgroundColor = sw[1];
+      div.style.color = sw[2] === '50' ? '#111' : '#fff';
+      div.textContent = sw[0] + ' ' + sw[1];
+      container.appendChild(div);
+    });
+  }
+
+  renderSwatches('primarySwatches', 'primary');
+  renderSwatches('secondarySwatches', 'secondary');
+})();
+
+// Active navigation highlighting on scroll
+(function() {
+  const sections = document.querySelectorAll('.content-section[id]');
+  const navLinks = document.querySelectorAll('.nav-chapters a');
+
+  function updateActiveNav() {
+    let current = '';
+    sections.forEach(function(section) {
+      const rect = section.getBoundingClientRect();
+      if (rect.top <= 150) { current = section.getAttribute('id'); }
+    });
+    navLinks.forEach(function(link) {
+      link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+    });
+  }
+
+  window.addEventListener('scroll', updateActiveNav, { passive: true });
+  updateActiveNav();
+})();
+</script>
+
+<!-- ============ TYPOGRAPHY SAFETY NET (CRITICAL — KEEP AT END) ============ -->
+<style>
+/* CSS Safety Net — must agree with JS below */
+body, p, li, td, th, div, span, blockquote, strong, em { word-break: normal !important; overflow-wrap: normal !important; }
+h1, h2, h3, h4, h5, h6, .section-title, .subsection-title, .section-number { word-break: keep-all !important; overflow-wrap: normal !important; }
+</style>
+<script>
+/* JS Typography Safety Net — runs after DOM ready */
+(function() {
+  function applyRules() {
+    document.querySelectorAll('p, li, td, th, div, span, blockquote, strong, em').forEach(function(el) {
+      el.style.wordBreak = 'normal';
+      el.style.overflowWrap = 'normal';
+    });
+    document.querySelectorAll('h1, h2, h3, h4, h5, h6, .section-title, .subsection-title').forEach(function(el) {
+      el.style.wordBreak = 'keep-all';
+      el.style.overflowWrap = 'normal';
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', applyRules);
+  } else {
+    applyRules();
+  }
+})();
+</script>
+
+</body>
+</html>

@@ -320,7 +320,7 @@ Set column widths: Version (50px), Date (80px), Changes (flex).
 
 ## Pitfall #19: Font Licensing Trap (Severity: HIGH)
 
-**Symptom（贯穿v2.x-v3.x）:** Logo使用付费商业字体(Eras Bold ITC ~$41/台)，Web加载违反许可。
+**Symptom（贯穿v2.x-v3.x）:** Logo使用付费商业字体(~$41/台)，Web加载违反许可。
 **解法：** Logo/Slogan→SVG路径嵌入(不需Web许可) + 正文标题→SIL OFL免费字体(Space Grotesk/Inter/Noto Sans SC)
 
 ---
